@@ -1,5 +1,6 @@
 from PIL import Image
 from monochrome import rgb_to_mono
+import edge_detection_sobel
 import thresholding
 import numpy as np
 
@@ -22,8 +23,10 @@ def show_image_from_array(image_array, save_name='show.png'):
 	img.show()
 
 
-sample_image = open_image_as_array('test.png')
-monochrome_image = rgb_to_mono(sample_image)
-## show_image_from_array(monochrome_image)
-thrsh = thresholding.threshold_adaptive(monochrome_image)
-show_image_from_array(thrsh)
+if __name__ == "__main__":
+	sample_image = open_image_as_array('ponczek.png')
+	monochrome_image = rgb_to_mono(sample_image)
+	## show_image_from_array(monochrome_image)
+	thrsh = thresholding.threshold_adaptive(monochrome_image)
+	edge_image = edge_detection_sobel.sobel_edge_detection(thrsh)
+	show_image_from_array(edge_image)
