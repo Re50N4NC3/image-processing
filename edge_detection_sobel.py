@@ -67,8 +67,15 @@ def conv_2d(img, ker):
 
 def sobel_edge_detection(image, fltr=0):
 	# define kernels for edge detection
+	# sobel operator
 	if fltr == 0:
 		kernel = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+	# sobel-feldman operator
+	if fltr == 1:
+		kernel = np.array([[3, 0, -3], [10, 0, -10], [3, 0, -3]])
+	# sharr operator
+	if fltr == 2:
+		kernel = np.array([[47, 0, -47], [162, 0, -162], [47, 0, -47]])
 
     # vertical lines
 	decompose_x = conv_2d(image, kernel)
