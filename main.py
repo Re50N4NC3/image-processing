@@ -28,5 +28,5 @@ if __name__ == "__main__":
 	monochrome_image = rgb_to_mono(sample_image)
 	## show_image_from_array(monochrome_image)
 	thrsh = thresholding.threshold_adaptive(monochrome_image)
-	edge_image = edge_detection_sobel.sobel_edge_detection(thrsh)
+	edge_image = edge_detection_sobel.sobel_edge_detection(thrsh, 0)
 	show_image_from_array(edge_image)
