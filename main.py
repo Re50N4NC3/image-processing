@@ -30,5 +30,5 @@ if __name__ == "__main__":
 	## show_image_from_array(monochrome_image)
 	## thrsh = thresholding.threshold_adaptive(monochrome_image)
 	## edge_image = edge_detection_sobel.sobel_edge_detection(thrsh, 0)
-	print(blur.generate_gauss_kernel(5, 1))
-	## show_image_from_array(edge_image)
+	blurred_image = blur.gaussian_blur(sample_image, 5, 12)
+	show_image_from_array(blurred_image)
