@@ -34,6 +34,6 @@ if __name__ == "__main__":
 	## blurred_image = blur.gaussian_blur(sample_image, 5, 12)
 	## show_image_from_array(blurred_image)
 
-	line_drawing.draw_line_on_image(sample_image, 20, 10, 60, 60)
+	line_drawing.draw_line_on_image(sample_image, 20, 10, 300, 600, 4)
 
 	show_image_from_array(sample_image)

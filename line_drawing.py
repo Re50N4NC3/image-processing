@@ -2,7 +2,7 @@ import math
 import numpy as np
 
 
-def draw_line_on_image(image, x0, y0, x1, y1):
+def draw_line_on_image(image, x0, y0, x1, y1, width: int=1):
     line_pixels = []
 
     if  abs(y1 - y0) < abs(x1 - x0):
@@ -15,9 +15,15 @@ def draw_line_on_image(image, x0, y0, x1, y1):
             line_pixels = get_line_points_up(x1, y1, x0, y0)
         else:
             line_pixels = get_line_points_up(x0, y0, x1, y1)
-
+    
     for pix in line_pixels:
         image[pix[0], pix[1]] = 0
+    
+        if width > 1:
+            for x in range(-(width - 1), width - 1):
+                for y in range(-(width - 1), width - 1):
+                    image[pix[0] + x, pix[1] + y] = 0
+
 
 
 def get_line_points_down(x0, y0, x1, y1):
