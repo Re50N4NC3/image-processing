@@ -1,7 +1,6 @@
 import numpy as np
 
 
-# TODO add edge cases
 def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t_count=500, draw=True):
     edge_height, edge_width = edge_image.shape[:2]
     edge_height_half, edge_width_half = edge_height / 2, edge_width / 2
