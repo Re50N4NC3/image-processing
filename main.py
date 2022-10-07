@@ -5,6 +5,7 @@ import thresholding
 import numpy as np
 import blur
 import line_drawing
+import line_detection
 
 
 def open_image_as_array(file_name):
@@ -27,13 +28,15 @@ def show_image_from_array(image_array, save_name='show.png'):
 
 if __name__ == "__main__":
 	sample_image = open_image_as_array('ponczek.png')
-	## monochrome_image = rgb_to_mono(sample_image)
+	blurred_image = blur.gaussian_blur(sample_image, 5, 12)
+	
+	monochrome_image = rgb_to_mono(blurred_image)
 	## show_image_from_array(monochrome_image)
-	## thrsh = thresholding.threshold_adaptive(monochrome_image)
-	## edge_image = edge_detection_sobel.sobel_edge_detection(thrsh, 0)
-	## blurred_image = blur.gaussian_blur(sample_image, 5, 12)
+	thrsh = thresholding.threshold_adaptive(monochrome_image)
+	edge_image = edge_detection_sobel.sobel_edge_detection(thrsh, 0)
 	## show_image_from_array(blurred_image)
 
-	line_drawing.draw_line_on_image(sample_image, 20, 10, -300, 6000, 4)
-
+	## line_drawing.draw_line_on_image(sample_image, 20, 10, -300, 6000, 4)
+	line_image_points = line_detection.line_detection_vectorized(sample_image, edge_image)
+	line_drawing.draw_multiple_lines_on_image(sample_image, line_image_points,2)
 	show_image_from_array(sample_image)
