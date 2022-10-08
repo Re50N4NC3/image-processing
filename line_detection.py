@@ -2,8 +2,7 @@ import numpy as np
 import line_drawing
 
 
-# TODO refactor into two functions, one that draws image with lines, other that returns line points
-def line_detection_vectorized(image, edge_image, draw=True, num_rhos=180, num_thetas=180, t_count=500):
+def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t_count=500):
     edge_height, edge_width = edge_image.shape[:2]
     edge_height_half, edge_width_half = edge_height / 2, edge_width / 2
     
@@ -76,12 +75,10 @@ def line_detection_vectorized(image, edge_image, draw=True, num_rhos=180, num_th
         
             a_thresh = rho
             b_thresh = theta
+            
     return line_points_final
 
-    # if draw:
-    #     for line in line_points_final:
-    #         image_with_lines = line_drawing.draw_line_on_image(image_with_lines, line[0], line[1], line[2], line[3], 2)
-    #     return image_with_lines
-
-    # return np.copy(image)
+def draw_image_lines(image, edge_image, line_width=2, num_rhos=180, num_thetas=180, t_count=500):
+    line_image_points = line_detection_vectorized(image, edge_image, draw=True, num_rhos=180, num_thetas=180, t_count=500):
+    line_drawing.draw_multiple_lines_on_image(image, line_image_points, line_width)
     
