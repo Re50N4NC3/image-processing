@@ -37,6 +37,6 @@ if __name__ == "__main__":
 	## show_image_from_array(blurred_image)
 
 	## line_drawing.draw_line_on_image(sample_image, 20, 10, -300, 6000, 4)
-	line_image_points = line_detection.line_detection_vectorized(sample_image, edge_image)
-	line_drawing.draw_multiple_lines_on_image(sample_image, line_image_points,2)
+	# line_image_points = line_detection.line_detection_vectorized(sample_image, edge_image)
+	line_detection.draw_image_lines(sample_image, line_image_points,2)
 	show_image_from_array(sample_image)
