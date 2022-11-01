@@ -27,10 +27,10 @@ def show_image_from_array(image_array, save_name='show.png'):
 
 
 if __name__ == "__main__":
-	sample_image = open_image_as_array('ponczek.png')
-	blurred_image = blur.gaussian_blur(sample_image, 5, 12)
+	sample_image = open_image_as_array('test_square.png')
+	# blurred_image = blur.gaussian_blur(sample_image, 5, 12)
 	
-	monochrome_image = rgb_to_mono(blurred_image)
+	monochrome_image = rgb_to_mono(sample_image)
 	## show_image_from_array(monochrome_image)
 	thrsh = thresholding.threshold_adaptive(monochrome_image)
 	edge_image = edge_detection_sobel.sobel_edge_detection(thrsh, 0)
