@@ -16,10 +16,15 @@ def open_image_as_array(file_name):
 		print("File doesn't exist")
 		return
 
-def show_image_from_array(image_array, save_name='show.png'):
+def show_image_from_array(image_array, save_name='show.png', remove_alpha=True):
+	if remove_alpha:
+		if len(np.shape(image_array)) > 3:
+			image_array = image_array[:,:,:3]
+
 	try:
 		img = Image.fromarray(image_array, 'RGB')
 	except ValueError:
+		print("Image is not RGB, showing as greyscale")
 		img = Image.fromarray(image_array, 'L')
 		
 	img.save(save_name)
@@ -36,7 +41,8 @@ if __name__ == "__main__":
 	edge_image = edge_detection_sobel.sobel_edge_detection(thrsh, 0)
 	## show_image_from_array(blurred_image)
 
-	## line_drawing.draw_line_on_image(sample_image, 20, 10, -300, 6000, 4)
-	# line_image_points = line_detection.line_detection_vectorized(sample_image, edge_image)
-	line_detection.draw_image_lines(sample_image, line_image_points,2)
-	show_image_from_array(sample_image)
+	##line_drawing.draw_line_on_image(sample_image, 20, 10, -300, 6000, 4)
+	## line_image_points = line_detection.line_detection_vectorized(sample_image, edge_image)
+	line_detection.draw_image_lines(sample_image, edge_image,4,180,180,2000)
+	print(np.shape(sample_image))
+	show_image_from_array(edge_image)

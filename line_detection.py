@@ -39,6 +39,7 @@ def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t
     it = 0
     line_points_final = []
     
+    c=0
     for line in lines:
         y, x = line
         rho = rhos[y]
@@ -75,10 +76,14 @@ def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t
         
             a_thresh = rho
             b_thresh = theta
+            c +=1
+
+            if c == 4:
+                break
             
     return line_points_final
 
 def draw_image_lines(image, edge_image, line_width=2, num_rhos=180, num_thetas=180, t_count=500):
-    line_image_points = line_detection_vectorized(image, edge_image, draw=True, num_rhos=180, num_thetas=180, t_count=500):
+    line_image_points = line_detection_vectorized(image, edge_image, num_rhos, num_thetas, t_count)
     line_drawing.draw_multiple_lines_on_image(image, line_image_points, line_width)
     
