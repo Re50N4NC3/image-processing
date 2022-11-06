@@ -3,7 +3,7 @@ from monochrome import rgb_to_mono
 import edge_detection_sobel
 import thresholding
 import numpy as np
-import blur
+import filters
 import line_drawing
 import line_detection
 
@@ -43,6 +43,6 @@ if __name__ == "__main__":
 
 	##line_drawing.draw_line_on_image(sample_image, 20, 10, -300, 6000, 4)
 	## line_image_points = line_detection.line_detection_vectorized(sample_image, edge_image)
-	line_detection.draw_image_lines(sample_image, edge_image,4,180,180,100)
-	print(np.shape(sample_image))
-	show_image_from_array(sample_image)
+	#line_detection.draw_image_lines(sample_image, edge_image,4,180,180,600)
+	pixelated = filters.pixelate(sample_image,8)
+	show_image_from_array(pixelated)

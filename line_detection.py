@@ -3,6 +3,8 @@ import line_drawing
 
 
 def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t_count=500):
+    ## Hough transform
+    #TODO give ability to show transform plot
     edge_height, edge_width = edge_image.shape[:2]
     edge_height_half, edge_width_half = edge_height / 2, edge_width / 2
     
@@ -22,7 +24,7 @@ def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t
     
     rho_values = np.matmul(edge_points, np.array([sin_thetas, cos_thetas]))
     
-    accumulator, theta_vals, rho_vals = np.histogram2d(
+    accumulator = np.histogram2d(
         np.tile(thetas, rho_values.shape[0]),
         rho_values.ravel(),
         bins=[thetas, rhos]
@@ -30,8 +32,6 @@ def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t
     
     accumulator = np.transpose(accumulator)
     lines = np.argwhere(accumulator > t_count)
-    rho_idxs, theta_idxs = lines[:, 0], lines[:, 1]
-    r, t = rhos[rho_idxs], thetas[theta_idxs]
     
     a_thresh = 1
     b_thresh = 1
@@ -39,7 +39,6 @@ def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t
     it = 0
     line_points_final = []
     
-    c=0
     for line in lines:
         y, x = line
         rho = rhos[y]
@@ -67,6 +66,7 @@ def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t
         else:
             x0 = (a * rho) + edge_width_half
             y0 = (b * rho) + edge_height_half
+            
             x0 = int(x0 + 1000 * (-b))
             y0 = int(y0 + 1000 * (a))
             x1 = int(x0 - 1000 * (-b))
@@ -76,10 +76,6 @@ def line_detection_vectorized(image, edge_image, num_rhos=180, num_thetas=180, t
         
             a_thresh = rho
             b_thresh = theta
-            c +=1
-
-            if c == 4:
-                break
             
     return line_points_final
 
